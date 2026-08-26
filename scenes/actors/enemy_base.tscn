@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_base.gd" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_hitbox.gd" id="2_hitbox"]
+[ext_resource type="Script" path="res://scripts/combat/hit_receiver.gd" id="3_receiver"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_movement"]
+radius = 0.34
+height = 1.82
+
+[sub_resource type="SphereShape3D" id="SphereShape_head"]
+radius = 0.31
+
+[sub_resource type="BoxShape3D" id="BoxShape_torso"]
+size = Vector3(0.76, 1.02, 0.48)
+
+[sub_resource type="BoxShape3D" id="BoxShape_legs"]
+size = Vector3(0.62, 0.72, 0.46)
+
+[node name="EnemyBase" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_enemy")
+
+[node name="MovementCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.02, 0)
+shape = SubResource("CapsuleShape_movement")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="HitReceiver" type="Node" parent="."]
+script = ExtResource("3_receiver")
+max_health = 4
+
+[node name="Hitboxes" type="Node3D" parent="."]
+
+[node name="Head" type="Area3D" parent="Hitboxes"]
+position = Vector3(0, 0.94, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_hitbox")
+body_part = &"head"
+damage_multiplier = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitboxes/Head"]
+shape = SubResource("SphereShape_head")
+
+[node name="Torso" type="Area3D" parent="Hitboxes"]
+position = Vector3(0, 0.28, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_hitbox")
+body_part = &"torso"
+damage_multiplier = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitboxes/Torso"]
+shape = SubResource("BoxShape_torso")
+
+[node name="Legs" type="Area3D" parent="Hitboxes"]
+position = Vector3(0, -0.58, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_hitbox")
+body_part = &"legs"
+damage_multiplier = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitboxes/Legs"]
+shape = SubResource("BoxShape_legs")

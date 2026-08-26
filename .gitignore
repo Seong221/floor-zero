@@ -1,0 +1,9 @@
+# Godot 4 editor cache/generated files - not source, regenerated locally
+.godot/
+*.translation
+export.cfg
+export_presets.cfg
+
+# Blender autosave backups
+*.blend1
+*.blend2

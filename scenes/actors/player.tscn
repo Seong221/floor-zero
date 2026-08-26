@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_controller"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/v12_carbine.tscn" id="2_weapon"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_player"]
+radius = 0.38
+height = 1.58
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_controller")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape_player")
+
+[node name="Yaw" type="Node3D" parent="."]
+position = Vector3(0, 1.18, 0)
+
+[node name="Pitch" type="Node3D" parent="Yaw"]
+
+[node name="CameraKick" type="Node3D" parent="Yaw/Pitch"]
+
+[node name="Camera3D" type="Camera3D" parent="Yaw/Pitch/CameraKick"]
+current = true
+
+[node name="V12Carbine" parent="Yaw/Pitch/CameraKick/Camera3D" instance=ExtResource("2_weapon")]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/room_01.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/actors/enemy_base.tscn" id="2_enemy"]
+
+[node name="Room01" type="Node3D"]
+script = ExtResource("1_room")
+
+[node name="DoorHinge" type="Node3D" parent="."]
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="RusherSpawn" type="Marker3D" parent="EnemySpawns"]
+position = Vector3(6.8, 0.8, 4.8)
+
+[node name="FlankerSpawn" type="Marker3D" parent="EnemySpawns"]
+position = Vector3(7.5, 0.8, 7.5)
+
+[node name="AnchorSpawn" type="Marker3D" parent="EnemySpawns"]
+position = Vector3(8.3, 0.8, 5.8)
+
+[node name="ReactionTestEnemy" parent="." instance=ExtResource("2_enemy")]
+position = Vector3(7.15, 0.91, 6.15)
+rotation_degrees = Vector3(0, 105, 0)
